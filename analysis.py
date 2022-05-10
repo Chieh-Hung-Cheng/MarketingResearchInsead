@@ -312,7 +312,7 @@ def question5():
     potential_mba = df_prim.loc[(df_prim['Q2b'] == 1) | (df_prim['Q2b'] == 2)]
     former_mba = df_prim.loc[(df_prim['Q2b'] == 3) | (df_prim['Q2b'] == 4)]
 
-    col_idxes = [7,8, *range(112, 117, 1)]
+    col_idxes = [7, 8, *range(112, 117, 1)]
     potential_cols = potential_mba.iloc[:, col_idxes]
     former_cols = former_mba.iloc[:, col_idxes]
     potential_cols.to_csv('potential_wtavg.csv')

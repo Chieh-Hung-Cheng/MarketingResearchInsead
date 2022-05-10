@@ -8,11 +8,11 @@ library("factoextra")
 
  1.
   # Load the data
-  df = read.csv("C:\\Users\\ChiehHung\\PycharmProjects\\insead\\potential_wtavg.csv")
+  df = read.csv("C:\\Users\\ChiehHung\\PycharmProjects\\insead\\former_wtavg.csv")
   head(df)
   summary(df)
   # Standardize
-  df_nmlz <- scale(df[, 3:8])# scale(df[,3:28])
+  df_nmlz <- scale(df[, 4:8])# scale(df[,3:28])
   head(df_nmlz)
   summary(df_nmlz)
   
@@ -25,7 +25,7 @@ library("factoextra")
   
   # Compute the distance matrix using normalized data
   res.dist <- dist(df_nmlz, method = "euclidean")
-  as.matrix(res.dist)[1:389, 1:389]
+  as.matrix(res.dist)[1:70, 1:70]# [1:389, 1:389]
   
   # Clustering
   res.hc <- hclust(d = res.dist, method = "ward.D2")
@@ -33,8 +33,8 @@ library("factoextra")
   res.coph <- cophenetic(res.hc)
   cor(res.dist, res.coph)
   # Cut and visualize
-  grp <- cutree(res.hc, k = 3)
-  fviz_dend(res.hc, k = 3, rect = TRUE, cex = 0.5)
+  grp <- cutree(res.hc, k = 2)
+  fviz_dend(res.hc, k = 2, rect = TRUE, cex = 0.3)
   table(grp)
   g1 = df[grp==1,]
   summary(g1)
