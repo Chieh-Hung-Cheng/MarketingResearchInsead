@@ -282,6 +282,7 @@ def question3():
     oneyear_dev = know_insead.loc[know_insead.Q26b.notna()]
     xs1, ys1 = smr_plot(oneyear_dev.Q26b, 1, 3, 'Q26b', 'Count', 'One Year MBA Negative Influence')
     print('One year preference:{} vs. {}'.format(len(oneyear_adv)/len(know_insead), len(oneyear_dev)/len(know_insead)))
+    # Error here
     barplot(xs0 + xs1, ys0+ys1, 'Q26','Count', 'One year MBA Influence')
 
     know_language = know_insead.loc[know_insead.Q22 == 1]
@@ -291,10 +292,37 @@ def question3():
     crit_dev = know_language[know_language.Q25B.notna()]
     xs3, ys3 =smr_plot(crit_dev.Q25B, 1, 3, 'Q25B', 'Count', 'Language Criteria Negative Influence')
     print('Language Cruteria preference:{} vs. {}'.format(len(crit_adv) / len(know_language), len(crit_dev) / len(know_language)))
+    # Error here
     barplot(xs2 + xs3, ys2 + ys3, 'Q25','Count', 'Language Criteria Influence')
+
+def add_factor_avg(df_prim, *categories):
+    for i, category in enumerate(categories):
+        df_prim[str(i)] = df_prim[category].mean(axis=1)
+    df_prim.to_csv('insead_dataset_nodul_wtavg.csv')
+
+def question5():
+    df_prim = df.loc[::2]
+
+    # df_prim.to_csv('insead_dataset_nodul.csv')
+
+    career_names = ['Q6_2', 'Q6_3', 'Q6_4', 'Q7_1']
+    ability_names = ['Q6_5', 'Q6_6', 'Q6_7']
+    incentive_names = ['Q7_2', 'Q7_5', 'Q7_6']
+    add_factor_avg(df_prim, career_names, ability_names, incentive_names)
+    potential_mba = df_prim.loc[(df_prim['Q2b'] == 1) | (df_prim['Q2b'] == 2)]
+    former_mba = df_prim.loc[(df_prim['Q2b'] == 3) | (df_prim['Q2b'] == 4)]
+
+    col_idxes = [7,8, *range(112, 117, 1)]
+    potential_cols = potential_mba.iloc[:, col_idxes]
+    former_cols = former_mba.iloc[:, col_idxes]
+    potential_cols.to_csv('potential_wtavg.csv')
+    former_cols.to_csv('former_wtavg.csv')
+
+    pass
 def main():
     # question1()
     # question2()
-    question3()
+    # question3()
+    question5()
 if __name__ == '__main__':
     main()
