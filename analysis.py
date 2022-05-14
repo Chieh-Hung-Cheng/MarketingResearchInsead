@@ -226,7 +226,7 @@ def gen_ndim(*category_lst):
             avg_val = cols.mean(axis=1).mean(axis=0)
             vec.append(avg_val)
         ret_vec_lst.append(vec)
-    return pd.DataFrame(ret_vec_lst, columns=['x', 'y', 'z', 'w'])
+    return pd.DataFrame(ret_vec_lst, columns=['x', 'y'])
 
 def plot2d(xs, ys, xl, yl):
     plt.scatter(xs, ys)
@@ -239,7 +239,7 @@ def plot2d(xs, ys, xl, yl):
     plt.show()
 
 def question2():
-    course = ['Q17_2', 'Q17_12', 'Q17_13', 'Q17_14', 'Q17_17', 'Q17_18', 'Q17_22']
+    '''course = ['Q17_2', 'Q17_12', 'Q17_13', 'Q17_14', 'Q17_17', 'Q17_18', 'Q17_22']
     employ = ['Q17_4', 'Q17_8', 'Q17_15', 'Q17_28', 'Q17_29']
     ability = ['Q17_9', 'Q17_16', 'Q17_19', 'Q17_21', 'Q17_24']
     image = ['Q17_1', 'Q17_3', 'Q17_6', 'Q17_23', 'Q17_26']
@@ -250,12 +250,14 @@ def question2():
     plot2d(vecs.x, vecs.w, 'course', 'image')
     plot2d(vecs.y, vecs.z, 'employ', 'ability')
     plot2d(vecs.y, vecs.w, 'employ', 'image')
-    plot2d(vecs.z, vecs.w, 'ability', 'image')
+    plot2d(vecs.z, vecs.w, 'ability', 'image')'''
 
-    '''
+
     cirr = ['Q17_2', 'Q17_5', 'Q17_6', 'Q17_12', 'Q17_13', 'Q17_14', 'Q17_17', 'Q17_18', 'Q17_22', 'Q17_30']
     ena = ['Q17_9', 'Q17_11', 'Q17_15', 'Q17_21', 'Q17_24', 'Q17_28', 'Q17_29']
-    '''
+    vecs = gen_ndim(cirr, ena)
+    plot2d(vecs.x, vecs.y, 'course', 'enablement')
+
 def barplot(xs, ys, xl, yl, title):
     plt.bar(xs, ys)
     plt.bar_label(plt.bar(xs, ys))
@@ -321,8 +323,8 @@ def question5():
     pass
 def main():
     # question1()
-    # question2()
+     question2()
     # question3()
-    question5()
+    # question5()
 if __name__ == '__main__':
     main()
